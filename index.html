@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Civics 128 Daily Quiz</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<noscript><p>This app needs JavaScript. It runs entirely in your browser.</p></noscript>
+<div class="wrap hidden" id="app">
+  <header>
+    <div class="label">2025 naturalization civics test · USCIS M-1778</div>
+    <h1>Civics 128</h1>
+    <p>A fresh random set from the 128 questions every day. Say each answer out loud, check it, and mark it. Your results are saved to a folder on your computer.</p>
+  </header>
+
+  <div class="line" id="views" role="group" aria-label="View"></div>
+
+  <section class="bar" id="settings" aria-label="Settings">
+    <div class="line">
+      <span class="label">Questions per day</span>
+      <span id="nchips" class="line"></span>
+      <label class="line"><span class="status">custom</span><input class="num" id="ncustom" type="number" min="1" max="128" inputmode="numeric" aria-label="Custom number of questions per day"></label>
+    </div>
+  </section>
+
+  <section class="bar" aria-label="Where your results are saved">
+    <div class="status" id="store">Checking storage…</div>
+    <div class="line">
+      <button class="small" id="pick" type="button">Choose results folder</button>
+      <button class="small hidden" id="reconnect" type="button">Reconnect folder</button>
+      <button class="small" id="dlcsv" type="button">Download CSVs</button>
+      <button class="small" id="dljson" type="button">Download backup</button>
+      <button class="small" id="imp" type="button">Load backup</button>
+      <input id="impfile" class="hidden" type="file" accept="application/json,.json">
+    </div>
+  </section>
+
+  <details class="bar safety" id="safety">
+    <summary>Safety and permissions: what this page can and cannot do</summary>
+    <ul>
+      <li><b>You grant access, and only you.</b> The folder is chosen in your browser’s own picker. The page cannot pick a folder, or open one, by itself.</li>
+      <li><b>One folder, one browser.</b> Access covers only the folder you pick, in this browser, for this page’s address. Other websites, other browsers and other people on your computer do not get it. Your browser may ask you to reconnect from time to time, and you can revoke it any time in the browser’s site settings (the icon at the left of the address bar).</li>
+      <li><b>Four named files.</b> The page writes <code>civics128-progress.json</code>, <code>civics128-daily.csv</code>, <code>civics128-questions.csv</code> and <code>civics128-attempts.csv</code>. It reads only the progress JSON, and it never deletes anything. It cannot see your other files or folders.</li>
+      <li><b>Nothing is uploaded.</b> There are no accounts, cookies, analytics or third-party scripts or fonts, and the page’s security policy tells your browser to block outgoing connections for your data. The author receives nothing. GitHub, which hosts the page, may log technical data such as IP address under its own privacy statement.</li>
+      <li><b>The files are plain text, not encrypted.</b> They hold only question numbers, your marks, dates and your questions-per-day setting. Anyone who can open that folder can read them, including cloud-sync services if the folder is synced.</li>
+      <li><b>You are responsible for your data.</b> Pick a private folder (not a shared, synced or public one, and not the project’s repository folder). Do not load or share files that contain private, confidential or harmful content. Only use <b>Load backup</b> with a file you created with this app. The author is not responsible for information you choose to store, load or share.</li>
+      <li><b>Shared or public computer?</b> Tick the shared-computer box on the agreement screen. Nothing is then read from or written to the browser or any folder, and your results disappear when you close or reload the page. Files you download are saved to that computer, so delete them when you finish.</li>
+    </ul>
+  </details>
+
+  <nav class="days" id="days" aria-label="Quiz days"></nav>
+
+  <section class="panel" id="panel" aria-live="polite"></section>
+  <section class="panel hidden" id="perf" aria-label="Quiz performance"></section>
+
+  <section class="rules">
+    <p>On test day the officer asks up to 20 of these 128 questions and stops after 12 correct answers.</p>
+    <p>Questions tagged <b>verify</b> depend on who holds office or where you live. Check uscis.gov/citizenship/testupdates in the week of your interview.</p>
+    <p>Each day's set favors questions you missed, then ones you have not seen, then the ones you answered correctly longest ago. Changing the number of questions per day adds to or trims today's set; questions you already answered stay.</p>
+    <div class="foot">
+      <button class="btn quiet" id="reset" type="button">Reset all progress</button>
+      <span id="resetmsg" class="status"></span>
+    </div>
+    <div class="foot">
+      <button class="small" id="terms-view" type="button">Terms of Use</button>
+      <button class="small" id="terms-dl" type="button">Download agreement</button>
+    </div>
+    <p class="status">Unofficial study aid. Not affiliated with USCIS or any government agency. Not legal advice.</p>
+  </section>
+</div>
+<script src="data/questions.js"></script>
+<script src="app.js"></script>
+<script src="terms.js"></script>
+<script src="gate.js"></script>
+</body>
+</html>
